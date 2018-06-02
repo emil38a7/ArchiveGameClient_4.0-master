@@ -1,0 +1,66 @@
+<div class="col-sm-6">
+  <form>
+      <fieldset>
+          <div>
+              <div class="form-group">
+                  <div>
+                      <label for="gameDifficulty"> Chose game level</label>
+                      <select class="form-control" id="gameDifficulty" 
+                      required [(ngModel)] = "difficultyModel" name="difficulty">
+                          <option *ngFor="let difficulty of gameDifficulty" [ngValue] = "difficulty">{{difficulty}}</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label for=""></label>
+                      <select class="form-control" id="gameLenght" required 
+                      name="lenght"
+                      [(ngModel)] = "lenghtModel">
+                          <option *ngFor="let length of gameLenght" [ngValue] = "length">{{length}}</option>
+                      </select>
+                  </div>
+              </div>    
+              
+              <div>
+                  <button type="button" class="btn btn-default" (click)="createGame(difficultyModel)">Create Game</button>
+              </div>
+          </div>
+      </fieldset>  
+  </form>
+
+  <div>
+      <legend>List of Game Questions</legend>  
+      <table class="table">
+          <thead>
+          <tr>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let question of gameQuestions" (click)="loadGameQuestions(question)">
+              <td>{{ question.questionID }}</td>
+              <td>{{ question.questionText }}</td> 
+              <td>{{ question.questionDifficulty }}</td>        
+     
+          </tr>      
+      </tbody>    
+  </table> 
+  </div>
+  <div>
+      <button  (click) = "startTheGame();">Lets begin the game</button>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <legend>List of players</legend>
+  <table class="table">
+      <thead>
+          <tr></tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of players">
+          <td>{{ player.playerID }}</td>
+          <td>{{ player.playerNickName }}</td> 
+      </tr>      
+  </tbody>    
+</table> 
+</div>
+

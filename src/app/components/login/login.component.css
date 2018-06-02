@@ -1,0 +1,95 @@
+
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */   
+button {
+    background: #17b349;
+    background-image: -webkit-linear-gradient(top, #17b349, #18612f);
+    background-image: -moz-linear-gradient(top, #17b349, #18612f);
+    background-image: -ms-linear-gradient(top, #17b349, #18612f);
+    background-image: -o-linear-gradient(top, #17b349, #18612f);
+    background-image: linear-gradient(to bottom, #17b349, #18612f);
+    -webkit-border-radius: 15;
+    -moz-border-radius: 15;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 1px 3px #f7f4f7;
+    -moz-box-shadow: 0px 1px 3px #f7f4f7;
+    box-shadow: 0px 1px 3px #f7f4f7;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 10px 20px 10px 20px;
+    border: solid #ffffff 1px;
+    text-decoration: none;
+    width: 96%;
+  }
+  
+  button:hover {
+    background: #22d446;
+    background-image: -webkit-linear-gradient(top, #22d446, #16851e);
+    background-image: -moz-linear-gradient(top, #22d446, #16851e);
+    background-image: -ms-linear-gradient(top, #22d446, #16851e);
+    background-image: -o-linear-gradient(top, #22d446, #16851e);
+    background-image: linear-gradient(to bottom, #22d446, #16851e);
+    text-decoration: none;
+  }
+
+
+
+/* Add a hover effect for buttons */
+
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.login {
+    width: 15%;
+    border-radius: 15%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 20px;
+    
+}
+
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}

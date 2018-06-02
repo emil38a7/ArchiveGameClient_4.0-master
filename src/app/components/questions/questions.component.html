@@ -1,0 +1,151 @@
+<div class="col-sm-6">
+
+    <legend>Question</legend>
+    <form (ngSubmit)="onSubmit()" #QForm="ngForm">
+            <fieldset [disabled]="formDisable">
+
+<!--Question text form-->
+      <div class="form-group">
+          <label for="questionText">Name</label>
+          <input class="form-control" type="text" id="questionText"
+          minlength="10"
+          required
+          [(ngModel)]="model.questionText" name="questionText"
+          #name="ngModel">
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert alert-danger">                       
+            <div *ngIf="name.errors.required">
+                Question Text is required.
+            </div>   
+            
+            <div *ngIf="name.errors.minlength">
+                Question text is to short,  min 10 characters long.
+            </div>
+        </div>
+
+<!--Select difficulty form-->
+      <div class="form-group">
+        <label for="difficulty">Question level</label>
+        <select class="form-control"  id="difficulty"
+                required
+                [(ngModel)]="model.questionDifficulty" name="difficulty"
+                >
+          <option *ngFor="let difficulty of difficulties" [ngValue]="difficulty" Selected="difficulty == 'abc'" >{{difficulty}}</option>
+        </select>
+      </div>
+
+<!--Array-->
+
+<!--Answer 1  form-->
+  
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <label for="answer">Answer 1</label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">Correct answer
+                </label>
+            </div>
+            <input
+            type="text" class="form-control" id="answer"  required
+            [(ngModel)]="model.questionAnswers[0].answerText" name="answer"
+            #diff="ngModel">
+        </div>
+  
+        <div *ngIf="diff.invalid && (diff.dirty || diff.touched)"
+            class="alert alert-danger">                       
+            <div *ngIf="diff.errors.required">
+                Answer 1 Text is required.
+            </div>   
+            
+            <div *ngIf="diff.errors.minlength">
+                Question text is to short,  min 10 characters long.
+            </div>
+        </div>
+
+<!--Answer 2  form-->
+  
+        <div class="form-group">
+            <label for="answer2">Answer 2</label>
+            <input
+            type="text" class="form-control" id="answer2"  required
+            [(ngModel)]="model.questionAnswers[1].answerText" name="answer2"
+            #answer2="ngModel">
+        </div>
+  
+        <div *ngIf="answer2.invalid && (answer2.dirty || answer2.touched)"
+            class="alert alert-danger">                       
+            <div *ngIf="answer2.errors.required">
+                Answer 2 Text is required.
+            </div>   
+            
+            <div *ngIf="answer2.errors.minlength">
+                Answer 2  text is to short,  min 10 characters long.
+            </div>
+        </div>
+        <!--Answer 3 form-->
+  
+        <div class="form-group">
+            <label for="model.questionAnswers[3].answerText">Answer 3</label>
+            <input
+            type="text" class="form-control" id="answer3"  required
+            [(ngModel)]="model.questionAnswers[2].answerText" name="answer3"
+            #answer3="ngModel">
+        </div>
+  
+        <div *ngIf="answer3.invalid && (answer3.dirty || answer3.touched)"
+            class="alert alert-danger">                       
+            <div *ngIf="answer3.errors.required">
+                Answer 3 Text is required.
+            </div>   
+            
+            <div *ngIf="answer3.errors.minlength">
+                Answer 3  text is to short,  min 10 characters long.
+            </div>
+        </div>
+
+<!--Answer 4 form-->
+  
+        <div class="form-group">
+            <label for="answer4">Answer 4</label>
+            <input
+            type="text" class="form-control" id="answer4"  required
+            [(ngModel)]="model.questionAnswers[3].answerText" name="answer4"
+            #answer4="ngModel">
+        </div>
+  
+            <div *ngIf="answer4.invalid && (answer4.dirty || answer4.touched)"
+                class="alert alert-danger">                       
+                <div *ngIf="answer4.errors.required">
+                    Answer 2 Text is required.
+                </div>   
+                
+                <div *ngIf="answer4.errors.minlength">
+                    Answer 2  text is to short,  min 10 characters long.
+                </div>
+            </div>
+            <div>            
+                <button type="submit" class="btn btn-success" [disabled]="!QForm.form.valid" (click)="postNewQuestion()">Submit</button>
+            </div>
+        </fieldset>
+        <button type="button" class="btn btn-default" style="float: right;" (click)="newQuestion(); heroForm.reset()">New Question</button>
+
+    </form>
+</div>
+
+
+<div class="col-sm-6">
+<legend>List of Questions</legend>  
+<table class="table">
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let question of questions" (click)="readQuestion(question)">
+            <td>{{ question.questionID }}</td>
+            <td>{{ question.questionText }}</td>        
+        </tr>      
+    </tbody>    
+</table> 
+</div>

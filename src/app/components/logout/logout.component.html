@@ -1,0 +1,20 @@
+<h3>Logout Form</h3>
+<div class="container">
+  <div class="row"></div>
+    <div class="col-sm-8" *ngIf="authService.getUser()">
+      <div class="imgcontainer">
+            <img src="assets/images/logout.jpg" alt="Avatar" class="logout">
+      </div>
+      <button type="submit" (click)="logout()">Log out</button>
+    </div>
+  <div class="row"></div>
+</div>
+
+     
+
+    
+      
+        
+
+
+

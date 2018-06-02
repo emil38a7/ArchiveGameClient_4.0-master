@@ -1,0 +1,77 @@
+label {
+    font-size: 20px;
+    margin-left: 250px;
+    margin-top: 300px;
+    display:inline-block;
+}
+progress{
+    font-size: 20px;
+    margin-left: -300px;
+    margin-top: 330px;
+    display:inline-block;
+}
+
+textarea {
+    margin-left: 150px;
+    border-left: 1px solid gray;
+    margin-top: 200px;
+    resize: none;
+    width: 700px;
+    height: 150px;
+    border: 5px solid orange;
+    padding: 1em;
+    overflow: hidden;
+    font-size: 30px;
+    text-align: center;
+    margin-right: 100px;
+
+    }
+    header, footer {
+        padding: 1em;
+        color: white;
+        background-color: orange;
+        clear: left;
+        text-align: center;
+        
+    }
+
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;  
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+        text-align: center;
+    }
+    
+    .flex-container > * {
+        padding: 15px;
+        -webkit-flex: 1 100%;
+        flex: 1 100%;
+        width: 100%;
+        border: 1px solid gray;
+    }
+  
+
+    .two-col {
+        overflow: hidden;/* Makes this div contain its floats */
+    }
+    
+    .two-col .col1,
+    .two-col .col2 {
+        width :35%;
+    }
+    
+    .two-col .col1 {
+        float: left;
+    }
+    
+    .two-col .col2 {
+        float: right;
+    }
+    
+    .two-col label {
+        display: block;
+    }
+    .row{
+        float: left;
+    }

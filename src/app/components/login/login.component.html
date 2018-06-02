@@ -1,0 +1,32 @@
+<h3>Login Form</h3>
+
+
+<div class="col-sm-8" *ngIf="!authService.getUser()">
+  <div class="imgcontainer">
+  <img src="assets/images/login.jpg" alt="Avatar" class="login">
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="message">
+  {{ message }}
+</div>
+  <form class="form-inline" (ngSubmit)="onSubmit()" #LoginForm="ngForm">
+        <div class="container">
+          
+          <label for="username" ><b>Username</b></label>
+          <input class="form-control" placeholder="Enter Email" id="userEmail" required [(ngModel)]="model.userEmail" name="userEmail" #userEmail="ngModel">
+        </div>
+
+        <div class="container">
+          <label for="userPassword"><b>Password</b></label>
+          <input class="form-control" placeholder="Enter Password" id="userPassword" required [(ngModel)]="model.userPassword" name="userPassword" #userPassword="ngModel">
+        </div>
+      
+    <button type="submit" class="btn btn-success"  (click)="loginBeta(model)">Log in</button>
+  </form>
+</div>
+
+
+  <div class="well" *ngIf="authService.getUser()">
+    Logged in as <b>{{ authService.getUser() }}</b>
+  </div>
+  
+

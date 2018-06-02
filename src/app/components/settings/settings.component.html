@@ -1,0 +1,81 @@
+<div class="col-sm-6">
+  <legend>List of Users</legend>  
+  <table class="table">
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user.userName }}</td>
+            <td>{{ user.userRole }}</td>        
+        </tr>      
+    </tbody>    
+  </table> 
+</div>
+<!--User Form-->
+<div class="col-sm-6">
+    <legend>User</legend>
+
+  <form (ngSubmit)="onSubmit()" #UserForm="ngForm">
+      <fieldset>
+          <!--User Name-->
+        <div class="form-group">
+          <label for="userName">Name</label>
+          <input class="form-control" type="text" id="userName"
+          minlength="10"
+          required
+          [(ngModel)]="model.userName" name="userName"
+          #name="ngModel">
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert alert-danger">                       
+            <div *ngIf="name.errors.required">
+                Question Text is required.
+            </div>   
+            
+            <div *ngIf="name.errors.minlength">
+                Question text is to short,  min 10 characters long.
+            </div>
+        </div>
+
+          <!--User Email-->
+          <div class="form-group">
+                <label for="userEmail">Name</label>
+                <input class="form-control" type="text" id="userEmail"
+                minlength="10"
+                required
+                [(ngModel)]="model.userEmail" name="userEmail"
+                #email="ngModel">
+              </div>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert alert-danger">                       
+                  <div *ngIf="email.errors.required">
+                      Question Text is required.
+                  </div>   
+                  
+                  <div *ngIf="email.errors.minlength">
+                      Question text is to short,  min 10 characters long.
+                  </div>
+              </div>
+
+              <!--User Role-->
+         <!--Select difficulty form-->
+         <div class="form-group">
+             <label for="userRole">Role</label>
+             <select class="form-control" id="userrole"
+             required
+             [(ngModel)]="model.userRole" name="userRole">
+                 <option *ngFor="let role of roles" [ngValue]="role" >{{role}}</option>
+             </select>
+
+         </div>
+
+
+      </fieldset>
+  </form>
+</div>
+
+
+
+
