@@ -23,15 +23,16 @@ export class AuthService {
   loginHTTPService(model):string{
     this.httpService.loginHTTP(model).subscribe(res => {
       if(res==202){
-        alert('Yes' + res);
+        //alert('Yes' + res);
         this.serverStatus = res;
-        localStorage.setItem('username', model.userPassword);
+        localStorage.setItem('username', model.userEmail);
       } else {
-        alert ('No' + res);
+        alert ('No acces');
         this.serverStatus = res;
+
       }
     }, error => console.error(error)); 
-    alert('status is :' + this.serverStatus)
+    //alert('status is :' + this.serverStatus)
     return this.serverStatus;
   }
 
