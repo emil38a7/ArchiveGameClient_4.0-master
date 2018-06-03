@@ -26,7 +26,7 @@ export class GameComponent implements OnInit {
   randomIndexes = [];
   players:Player[];
   myInterval;
-  currentQuestion:Question = new Question('0', '', '', [new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')]);
+  currentQuestion:Question = new Question('0', '',[new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '');
 
   constructor(hService:HttpServiceService) {
     this.htttpService = hService;
@@ -70,10 +70,13 @@ export class GameComponent implements OnInit {
     SetGameQuestions(randomArray, filteredQuestions){
       var i;
       var j;
+      var k = 1;
       for (i = 0; i< randomArray.length; i++){
         for(j = 0; j < filteredQuestions.length;j++){
           if(j == randomArray[i]){
+            this.filteredQuestions[j].questionIndex = k.toString();
             this.gameQuestions.push(filteredQuestions[j]);
+            k++;
           }
         }
       }
