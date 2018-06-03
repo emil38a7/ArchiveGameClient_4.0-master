@@ -17,7 +17,7 @@ export class GameComponent implements OnInit {
   htttpService:HttpServiceService
   gameDifficulty = ['very easy','easy', 'normal','hard', 'very hard'];
   gameLenght = ['2', '5', '10','15', '20'];
-  gameModel = new Game('1');
+  gameModel = new Game('', '', '');
   questionRelationModel = new QuestionRelation('', '');
   difficultyModel = 'hard';
   lenghtModel = '2';
@@ -106,11 +106,16 @@ export class GameComponent implements OnInit {
         this.fillArrayWithUniqeRandoms(gameLenghtInt, this.filteredQuestions.length, this.randomIndexes);
         this.SetGameQuestions(this.randomIndexes, this.filteredQuestions);
         this.myTimer();
+        //update game model
+        this.gameModel.gameID = "5";
+        this.gameModel.gameStatus = "open";
+        this.gameModel.gameLength = this.gameQuestions.length.toString();
+
         this.htttpService.postGame(this.gameModel);
         this.gameQuestions.forEach(element => {
           this.htttpService.postQuestionRelation(new QuestionRelation(element.questionID, this.gameModel.gameID));
         });
-
+       
         this.htttpService.postCurrentQuestion(this.currentQuestion);
       }, error=> console.error(error));    
     }
