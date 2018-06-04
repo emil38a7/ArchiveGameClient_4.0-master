@@ -7,6 +7,7 @@ import { Player } from '../../models/players.model'
 import { PlayerRelation } from '../../models/player-relation.model';
 import { Answer } from '../../models/answer.model';
 import { timeout } from 'q';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-game',
@@ -27,8 +28,9 @@ export class GameComponent implements OnInit {
   players:Player[];
   myInterval;
   currentQuestion:Question = new Question('0', '',[new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '');
+  endGameQuestion:Question = new Question('-1', '',[new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '');
 
-  constructor(hService:HttpServiceService) {
+  constructor(hService:HttpServiceService, private router:Router) {
     this.htttpService = hService;
    }
     submitted = false;
@@ -80,6 +82,8 @@ export class GameComponent implements OnInit {
           }
         }
       }
+      this.endGameQuestion.questionIndex = (k).toString();
+      this.gameQuestions.push(this.endGameQuestion);
     }
 
     myTimer(){
@@ -91,15 +95,13 @@ export class GameComponent implements OnInit {
       this.players.forEach(element => {
         this.htttpService.postPlayerRelation(new PlayerRelation(element.playerID, this.gameModel.gameID));
       });
-      //this.htttpService.postCurrentQuestion(this.currentQuestion);
     
       for(let j = 0; j < this.gameQuestions.length; j++){
         setTimeout(() => {
-          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 20000 * j);
-          //this.currentQuestion=this.gameQuestions[j];
+          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 5000 * j);
         }
-        //display question page :)
-    }
+        //window.location.href = location.pathname('/..');
+      }
 
     createGame(gameDifficulty){
       var gameLenghtInt = parseInt(this.lenghtModel);

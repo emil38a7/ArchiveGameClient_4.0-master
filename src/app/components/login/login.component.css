@@ -93,3 +93,12 @@ span.psw {
         width: 100%;
     }
 }
+
+#grad1 {
+    background-image:url('../../../assets/images/background2.png');
+    background-size: 100%,100%;
+    width: calc(98% + 7px);
+    height: 100vh;
+    margin-right: 0px;
+    position: absolute;
+}

@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.css']
 })
-export class LogoutComponent{
+export class LogoutComponent implements OnInit {
   message: string;
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private router:Router) {
     this.message = '';
+
+  }
+
+  ngOnInit(){
+    var r = confirm("Do you want to log out?");
+    if (r == true) {
+        this.logout();
+        this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   logout(): boolean {
@@ -23,7 +35,4 @@ export class LogoutComponent{
     }
     return false;
   }
-
- 
-
 }

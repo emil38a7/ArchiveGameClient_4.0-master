@@ -18,7 +18,6 @@ import { LoggedInGuard } from './logged-in.guard';
 import { SecretComponent } from './components/secret/secret.component';
 import { HttpServiceService, ServiceHTTP_PROVIDERS } from './services/hhtp-service/http-service.service';
 import { GameComponent } from './components/game/game.component';
-import { RunningAppComponent } from './components/running-app/running-app.component';
 import { NavMenuServiceService } from './services/nav-menu-service.service';
 
 
@@ -34,7 +33,6 @@ import { NavMenuServiceService } from './services/nav-menu-service.service';
     LogoutComponent,
     SecretComponent,
     GameComponent,
-    RunningAppComponent,
   
   ],
   imports: [
@@ -49,8 +47,6 @@ import { NavMenuServiceService } from './services/nav-menu-service.service';
       { path:'Login',component:LoginComponent},
       { path:'Logout',component:LogoutComponent,canActivate:[LoggedInGuard] },
       { path:'Game',component:GameComponent,canActivate:[LoggedInGuard] },
-      { path:'Run',component:RunningAppComponent,canActivate:[LoggedInGuard] },
-      { path: '**', redirectTo: 'Run' }
     ])
   ],
   providers: [AuthService,LoggedInGuard, HttpServiceService, ServiceHTTP_PROVIDERS,NavMenuServiceService],  
