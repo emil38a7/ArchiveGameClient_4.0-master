@@ -139,16 +139,21 @@ export class GameComponent implements OnInit {
     }
 
     startTheGame(){
-      clearInterval(this.myInterval);
+      //clearInterval(this.myInterval);
       this.players.forEach(element => {
         this.htttpService.postPlayerRelation(new PlayerRelation(element.playerID, this.gameModel.gameID));
       });
     
+      window.open("http://localhost/DisplayQuestionMarty.html", "_blank");
+
+
       for(let j = 0; j < this.gameQuestions.length; j++){
         setTimeout(() => {
           this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 10000 * j);
+          if(this.currentQuestion.questionIndex == this.gameLenght.toString()){
+            this.findGameWinner();
+          }
         }
-        //window.location.href = location.pathname('/..');
       }
 
     createGame(gameDifficulty){
@@ -178,6 +183,10 @@ export class GameComponent implements OnInit {
       //console.log("new question is :" + newQuestion.questionID + " currentQuestion is: " + currentQuestion.questionID)   
       this.htttpService.updateCurrenQuestion(newQuestion, currentQuestion);
       this.currentQuestion = newQuestion;
+    }
+
+    createUniqueQuestionID(){
+      //not implemented
     }
 }
 //git push -u origin master
