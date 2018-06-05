@@ -150,7 +150,7 @@ export class GameComponent implements OnInit {
       for(let j = 0; j < this.gameQuestions.length; j++){
         setTimeout(() => {
           this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 10000 * j);
-          if(this.currentQuestion.questionIndex == this.gameLenght.toString()){
+          if(this.currentQuestion.questionIndex == this.gameLenght.toString()){ //chenge code
             this.findGameWinner();
           }
         }
