@@ -8,6 +8,8 @@ import { PlayerRelation } from '../../models/player-relation.model';
 import { Answer } from '../../models/answer.model';
 import { timeout } from 'q';
 import { Router } from '@angular/router'
+import { AnswersRelation } from '../../models/answers-relation.model';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-game',
@@ -22,13 +24,18 @@ export class GameComponent implements OnInit {
   questionRelationModel = new QuestionRelation('', '');
   difficultyModel = 'hard';
   lenghtModel = '2';
+
   filteredQuestions: Question[];
   gameQuestions: Question[] = [];
   randomIndexes = [];
   players:Player[];
+  answerRelationsList:AnswersRelation[];
+  answers: Answer[];
+  myPlayers =[new Player("5b1598d47cfa8f3ddc84fd48", "1", "Ala", "5"), new Player("", "2", "Bob", "10"),new Player("", "3", "Fred", "0"),]
+
   myInterval;
-  currentQuestion:Question = new Question('0', '',[new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '');
-  endGameQuestion:Question = new Question('-1', '',[new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '');
+  currentQuestion:Question = new Question('0', '',[new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'', '');
+  endGameQuestion:Question = new Question('-1', '',[new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'', '');
 
   constructor(hService:HttpServiceService, private router:Router) {
     this.htttpService = hService;
@@ -50,8 +57,7 @@ export class GameComponent implements OnInit {
     displayPlayers(){
       this.htttpService.displayPlayersList().subscribe(data => {
       this.players=data as Player[];
-      console.log("Tik tak!");
-      
+      console.log("Players running");
       }, error=> console.error(error));
     }
   
@@ -87,7 +93,49 @@ export class GameComponent implements OnInit {
     }
 
     myTimer(){
-      this.myInterval =  setInterval(() => { this.displayPlayers() }, 1000);
+      
+      this.myInterval =  setInterval(() => { 
+        //if game not finished
+        this.displayPlayers() }, 1000);
+    }
+
+    finishGame(){
+      clearInterval(this.myInterval);
+    }
+
+    findGameWinner(){
+      this.finishGame();
+      console.log("1");
+
+      this.htttpService.displayAnswerRelationList().subscribe(data => {
+        this.answerRelationsList=data as AnswersRelation[]; 
+        var playerScore = 0;
+        //this.myPlayers = 
+        this.players.forEach(player => {
+          console.log(player.playerNickName)
+          this.answerRelationsList.forEach(answerRelation => {
+            console.log(answerRelation.playerID)
+              if (player._id == answerRelation.playerID){
+                this.gameQuestions.forEach(gameQuestion => {
+                  gameQuestion.questionAnswers.forEach(answer => {
+                    console.log(answer.answerID)
+                    if(answerRelation.answerID == answer._id){
+                      if(answer.correctAnswer == "true"){
+                        playerScore++;
+                        player.playerScore = playerScore.toString();
+                      }
+                    }
+                  });
+                });
+              }
+            });
+            alert("Score is:  "+ player.playerNickName + ", " + player.playerScore)
+            playerScore = 0;
+          });
+          this.players.forEach(player => {
+            this.htttpService.updatePlayer(player);
+          });
+        }, error=> console.error(error));    
     }
 
     startTheGame(){
@@ -98,7 +146,7 @@ export class GameComponent implements OnInit {
     
       for(let j = 0; j < this.gameQuestions.length; j++){
         setTimeout(() => {
-          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 5000 * j);
+          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 10000 * j);
         }
         //window.location.href = location.pathname('/..');
       }
@@ -120,8 +168,8 @@ export class GameComponent implements OnInit {
         this.gameQuestions.forEach(element => {
           this.htttpService.postQuestionRelation(new QuestionRelation(element.questionID, this.gameModel.gameID));
         });
-       
-        this.htttpService.postCurrentQuestion(this.currentQuestion);
+       this.htttpService.postCurrentQuestion(this.currentQuestion);
+        //open display question site
       }, error=> console.error(error));    
     }
 

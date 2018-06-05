@@ -9,6 +9,7 @@ import { HttpClient,HttpParams } from '@angular/common/http';
 @Injectable()
 export class HttpServiceService {
 questionToPost;
+playertToUpdate;
 gameToPost;
 questionRelationToPost;
 playerRelationToPost;
@@ -25,6 +26,7 @@ QuestionRelationUrl = "http://localhost:3000/questionRelation";
 playerRelationUrl = "http://localhost:3000/playerRelation";
 currentQuestionUrl = "http://localhost:3000/currentQuestion";
 answerRelationUrl = "http://localhost:3000/answerRelation";
+answerUrl = "http://localhost:3000/answer";
 
 constructor(private http: Http){
 }
@@ -39,10 +41,21 @@ displayQuestionList(): Observable<any> {
   .map(data => data.json());
 }
 
+displayAnswerList():Observable<any> {
+  return this.http.get(this.answerUrl)
+  .map(data => data.json());
+}
+
+displayAnswerRelationList():Observable<any> {
+  return this.http.get(this.answerRelationUrl)
+  .map(data => data.json());
+}
+
 displayPlayersList(): Observable<any> {
   return this.http.get(this.playerUrl)
   .map(data => data.json());
 }
+
 displayUserList():Observable<any> {
   return this.http.get(this.userUrl)
   .map(data => data.json());
@@ -130,6 +143,22 @@ updateCurrenQuestion(newQuestion, currentQuestion){
     .subscribe(
        (val) => {
           console.log("New question" + this.questionToPost.questionID + " current question id " + currentQuestion.questionID)
+          console.log("POST call successful value returned in body", val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+}
+
+updatePlayer(model){
+  this.playertToUpdate = model;
+  console.log(this.playertToUpdate)
+  this.http.put(this.playerUrl, model, {params: {playerID :model.playerID}})
+    .subscribe(
+       (val) => {
           console.log("POST call successful value returned in body", val);
         },
         response => {

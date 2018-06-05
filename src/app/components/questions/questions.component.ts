@@ -22,7 +22,7 @@ export class QuestionsComponent {
 
   difficulties = ['very easy', 'easy', 'normal','hard', 'very hard'];
 
-  model = new Question('', '',[ new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')],'', '0');
+  model = new Question('', '',[ new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'', '0');
 
   public questions: Question[];
   url: string = "http://localhost:3000/question"
@@ -42,20 +42,20 @@ export class QuestionsComponent {
     onSubmit() { this.submitted = true; }
     
      newQuestion() {
-      this.model = new Question('', '', [new Answer('', '', '', ''), new Answer('', '', '', ''),new Answer('', '', '', ''), new Answer('', '', '', '')], '', '');
+      this.model = new Question('', '', [new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')], '', '');
       this.formDisable = false;
 
     }
 
     postNewQuestion(){
       this.model.questionID='5';
-      this.model.questionText='abc';
+      this.model.questionText='test question';
       this.model.questionDifficulty = "easy";
       this.model.questionAnswers = [
-                                new Answer('1','ans1', '11', 'true'), 
-                                new Answer('2', 'ans2', '11', 'false'),
-                                new Answer('3', 'ans3', '11', 'false'),
-                                new Answer('4', 'ans4', '11', 'false')
+                                new Answer('', '1','ans1', '11', 'true'), 
+                                new Answer('', '2', 'ans2', '11', 'false'),
+                                new Answer('', '3', 'ans3', '11', 'false'),
+                                new Answer('', '4', 'ans4', '11', 'false')
                               ];
 
       //alert('ID ' + model.questionID +' Text ' + model.questionText + ' Diff ' +  model.questionDifficulty + ' ans text ' +  model.questionAnswers[0].answerText+
