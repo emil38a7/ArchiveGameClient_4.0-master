@@ -34,7 +34,7 @@ export class GameComponent implements OnInit {
   myPlayers =[new Player("5b1598d47cfa8f3ddc84fd48", "1", "Ala", "5"), new Player("", "2", "Bob", "10"),new Player("", "3", "Fred", "0"),]
 
   myInterval;
-  currentQuestion:Question = new Question('0', '',[new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'', '');
+  currentQuestion:Question = new Question('0', '',[new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'0', '');
   endGameQuestion:Question = new Question('-1', '',[new Answer('','', '', '', ''), new Answer('','', '', '', ''),new Answer('','', '', '', ''), new Answer('','', '', '', '')],'', '');
 
   constructor(hService:HttpServiceService, private router:Router) {
@@ -149,10 +149,7 @@ export class GameComponent implements OnInit {
 
       for(let j = 0; j < this.gameQuestions.length; j++){
         setTimeout(() => {
-          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 10000 * j);
-          if(this.currentQuestion.questionIndex == this.gameLenght.toString()){ //chenge code
-            this.findGameWinner();
-          }
+          this.updateQuestion(this.gameQuestions[j], this.currentQuestion)}, 8000 * j)
         }
       }
 
@@ -182,7 +179,12 @@ export class GameComponent implements OnInit {
       //console.log("timeout"); 
       //console.log("new question is :" + newQuestion.questionID + " currentQuestion is: " + currentQuestion.questionID)   
       this.htttpService.updateCurrenQuestion(newQuestion, currentQuestion);
-      this.currentQuestion = newQuestion;
+      this.currentQuestion = newQuestion
+      var number = (this.gameQuestions.length) - 1;
+
+      if(this.currentQuestion.questionIndex == number.toString()){ //chenge code
+        this.findGameWinner();
+      }
     }
 
     createUniqueQuestionID(){

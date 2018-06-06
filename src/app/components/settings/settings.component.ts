@@ -26,6 +26,10 @@ export class SettingsComponent implements OnInit {
         }, error => console.error(error));
   }
 
+  submitUser(){
+    alert("Not implemented")
+  }
+
   ngOnInit() {
   }
   onSubmit() { this.submitted = true; }
